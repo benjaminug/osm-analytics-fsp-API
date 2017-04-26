@@ -9,7 +9,6 @@ var validator = require('fluent-validator');
 exports.searchDataValidator = function (searchObject) {
 
     var validation = validator()
-        //.validate(searchObject).isNotNullOrUndefined()
         .validate(searchObject.search).isNotEmpty("Search query is can not be null or empty")
         .validate(searchObject.long).isFloat('Longitude must be a number').and.isNumeric('Longitude must be a number').or.isNotEmpty('Longitude can not be null or empty')
         .validate(searchObject.lat).isFloat('Latitude must be a number').and.isNumeric('Latitude must be a number').or.isNotEmpty('Latitude can not be empty')

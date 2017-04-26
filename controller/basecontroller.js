@@ -7,25 +7,13 @@ var todoList = require('../controller/todoController');
 var searchcrtl = require('../controller/searchcontroller');
 
 
-//
-//////const todRout = todoList(router);
-////
-//////Get a list of all Items based on location coordinates
-////router.get('/ninjas', function (req, res, next) {
-////
-////    res.send({name:"morgan"});
-////});
-////
-//
-//module.exports = todoList;
-
 router.route('/ninjas/:id').get(todoList.getMovie);
 router.route('/ninjas').post(todoList.postMovie);
 router.route('/ninjas').get(todoList.getMovies);
 router.route('/ninjas').put(todoList.getMovies);
 
 
-router.route('/overpass/banks/:search').get(searchcrtl.getBanks);
+router.route('/overpass/finance/:search').get(searchcrtl.getBanks);
 
 module.exports = router;
 

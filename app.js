@@ -4,16 +4,16 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const _apicache = require('apicache');
 
 
 //Set up express app
 const app = express();
 
-//Connect to mongo db
-mongoose.connect('mongodb://localhost/Hot_Realtime_FSL_Api');
-mongoose.Promise = global.Promise;
+////Connect to mongo db
+//mongoose.connect('mongodb://localhost/Hot_Realtime_FSL_Api');
+//mongoose.Promise = global.Promise;
 
 //Parse the body to Json or any other format
 app.use(bodyParser.json());
