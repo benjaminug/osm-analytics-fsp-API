@@ -3,9 +3,10 @@
  */
 
 
-var queryOverpass = require("query-overpass");
+
 const searchService = require('../services/mobile_search_service/searchservice');
 const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
+
 
 module.exports = {
 
@@ -19,21 +20,10 @@ module.exports = {
             return next(new Error(ValidationErrors));
         }
 
-        //Build the search query
-        var query = searchService.generateSearchQuery(searchObject);
-
-        //Send query to Overpass API
-        queryOverpass(query, function (err, geojson) {
-            if (err) {
-                return next(err);
-            }
-
-            //Process returned data
-            var processedGeojson = _geoJsonHelperService.processGeojsonData(geojson);
-
-            res.send(processedGeojson);
-        });
+        var client_radius = Number(searchObject.radius);
+        searchService.processRequest(searchObject, next, res, client_radius);
     }
 };
+
 
 

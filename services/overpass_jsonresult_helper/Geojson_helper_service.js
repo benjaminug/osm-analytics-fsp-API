@@ -5,7 +5,7 @@ var validator = require('fluent-validator');
 
 module.exports = {
 
-    processGeojsonData: function (geojsonData) {
+    processGeojsonData: function (geojsonData, search_radius) {
 
         var data = [];
 
@@ -18,7 +18,9 @@ module.exports = {
             var coordinates = featuresCollection[i]["geometry"].coordinates;
 
             tags.id = id;
+            tags.radius = search_radius;
             tags.coordinates = coordinates;
+
 
             data.push(tags);
         }
@@ -42,6 +44,9 @@ module.exports = {
         console.log('Has no errors');
     }
 };
+
+
+
 
 
 

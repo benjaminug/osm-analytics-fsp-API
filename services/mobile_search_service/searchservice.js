@@ -1,10 +1,15 @@
 /**
  * Created by Morgan on 4/21/2017.
  */
-
+"use strict";
 var util = require('util');
+var queryOverpass = require("query-overpass");
+const _geoJsonHelperService = require('../../services/overpass_jsonresult_helper/Geojson_helper_service');
+const settings = require('../../common/settings');
 
-module.exports = {
+var maxQueryCount = 0;
+
+var self = module.exports = {
 
     generateSearchQuery: function (searchObject) {
         //do something
@@ -20,6 +25,39 @@ module.exports = {
         query = util.format(query, radius, latitude, longitude, searchterm);
 
         return query;
+    },
+
+    processRequest: function (searchObject, next, res, client_radius) {
+        //Build the search query
+        var query = self.generateSearchQuery(searchObject);
+
+        maxQueryCount++;
+
+        //Send query to Overpass API
+        queryOverpass(query, function (err, geojson) {
+            if (err) {
+                maxQueryCount = 0;
+                return next(err);
+            }
+
+            var current_radius = Number(searchObject.radius);//Get current object radius
+            //Process returned data
+            var processedGeojson = _geoJsonHelperService.processGeojsonData(geojson, current_radius);
+
+            if (processedGeojson.length === 0 && maxQueryCount < settings.max_request_count) {
+
+                var newRadius = current_radius + client_radius;//Add the current plus what the client sent
+                searchObject.radius = newRadius;
+
+                console.log('Radius: ' + searchObject.radius);
+
+                self.processRequest(searchObject, next, res, client_radius);
+            } else {
+                maxQueryCount = 0;
+                res.send(processedGeojson);
+            }
+
+        });
     }
 };
 

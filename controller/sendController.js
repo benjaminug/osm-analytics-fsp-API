@@ -2,7 +2,6 @@
  * Created by Morgan on 4/28/2017.
  */
 
-var queryOverpass = require("query-overpass");
 const sendService = require('../services/sendFSPs/send_service');
 const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
 
@@ -17,19 +16,9 @@ module.exports = {
             return next(new Error(ValidationErrors));
         }
 
-        //Build the search query
-        var query = sendService.generateSendQuery(sendObject);
 
-        //Send query to Overpass API
-        queryOverpass(query, function (err, geojson) {
-            if (err) {
-                return next(err);
-            }
+        var client_radius = Number(sendObject.radius);
+        sendService.processSendRequest(sendObject, next, res, client_radius);
 
-            //Process returned data
-            var processedGeojson = _geoJsonHelperService.processGeojsonData(geojson);
-
-            res.send(processedGeojson);
-        });
     }
 };

@@ -3,8 +3,13 @@
  */
 
 var util = require('util');
+var queryOverpass = require("query-overpass");
+const _geoJsonHelperService = require('../../services/overpass_jsonresult_helper/Geojson_helper_service');
+const settings = require('../../common/settings');
 
-module.exports = {
+var maxQueryCount = 0;
+
+var saveExpo = module.exports = {
 
     generateSaveQuery: function (saveObject) {
         //do something
@@ -18,5 +23,39 @@ module.exports = {
         query = util.format(query, radius, latitude, longitude, searchterm);
 
         return query;
+    },
+
+    processSaveRequest: function (searchObject, next, res, client_radius) {
+        //Build the search query
+        var query = saveExpo.generateSaveQuery(searchObject);
+
+        maxQueryCount++;
+
+        //Send query to Overpass API
+        queryOverpass(query, function (err, geojson) {
+            if (err) {
+                maxQueryCount = 0;
+                return next(err);
+            }
+
+            var current_radius = Number(searchObject.radius);//Get current object radius
+            //Process returned data
+            var processedGeojson = _geoJsonHelperService.processGeojsonData(geojson, current_radius);
+
+            if (processedGeojson.length === 0 && maxQueryCount < settings.max_request_count) {
+
+                var newRadius = current_radius + client_radius;//Add the current plus what the client sent
+                searchObject.radius = newRadius;
+
+                console.log('Radius: ' + searchObject.radius);
+                console.log('Query count: ' + maxQueryCount);
+
+                saveExpo.processSaveRequest(searchObject, next, res, client_radius);
+            } else {
+                maxQueryCount = 0;
+                res.send(processedGeojson);
+            }
+
+        });
     }
 };

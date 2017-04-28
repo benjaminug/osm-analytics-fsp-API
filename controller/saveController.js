@@ -2,7 +2,6 @@
  * Created by Morgan on 4/28/2017.
  */
 
-var queryOverpass = require("query-overpass");
 const saveService = require('../services/saveFSPs/save_service');
 const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
 
@@ -17,19 +16,9 @@ module.exports = {
             return next(new Error(ValidationErrors));
         }
 
-        //Build the search query
-        var query = saveService.generateSaveQuery(saveObject);
+        var client_radius = Number(saveObject.radius);
+        saveService.processSaveRequest(saveObject, next, res, client_radius);
 
-        //Send query to Overpass API
-        queryOverpass(query, function (err, geojson) {
-            if (err) {
-                return next(err);
-            }
 
-            //Process returned data
-            var processedGeojson = _geoJsonHelperService.processGeojsonData(geojson);
-
-            res.send(processedGeojson);
-        });
     }
 };
