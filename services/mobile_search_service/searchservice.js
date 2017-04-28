@@ -20,27 +20,6 @@ module.exports = {
         query = util.format(query, radius, latitude, longitude, searchterm);
 
         return query;
-    },
-    processGeojsonData: function (geojsonData) {
-
-        var data = [];
-
-        var featuresCollection = geojsonData["features"];
-
-        for (var i = 0; i < featuresCollection.length; i++) {
-
-            var id = featuresCollection[i]["properties"].id;
-            var tags = featuresCollection[i]["properties"]["tags"];
-            var coordinates = featuresCollection[i]["geometry"].coordinates;
-
-            tags.id = id;
-            tags.coordinates = coordinates;
-
-            data.push(tags);
-        }
-
-        return data;
-
     }
 };
 

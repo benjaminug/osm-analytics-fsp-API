@@ -1,26 +1,24 @@
 /**
- * Created by Morgan on 4/21/2017.
+ * Created by Morgan on 4/28/2017.
  */
 
-
 var queryOverpass = require("query-overpass");
-const searchService = require('../services/mobile_search_service/searchservice');
+const borrowService = require('../services/borrowFSPs/borrow_service');
 const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
 
 module.exports = {
 
-    getFinancial_Data: function (req, res, next) {
-        var searchObject = JSON.parse(req.params.search);//parse data to Json
+    getBorrow_Data: function (req, res, next) {
+        var borrowObject = JSON.parse(req.params.borrow);//parse data to Json
 
         //Validate the search data object
-        var ValidationErrors = _geoJsonHelperService.dataValidator(searchObject);
-
+        var ValidationErrors = _geoJsonHelperService.dataValidator(borrowObject);
         if (ValidationErrors) {
             return next(new Error(ValidationErrors));
         }
 
         //Build the search query
-        var query = searchService.generateSearchQuery(searchObject);
+        var query = borrowService.generateBorrowQuery(borrowObject);
 
         //Send query to Overpass API
         queryOverpass(query, function (err, geojson) {
@@ -35,5 +33,3 @@ module.exports = {
         });
     }
 };
-
-

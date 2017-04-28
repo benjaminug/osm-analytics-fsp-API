@@ -2,7 +2,7 @@
     "name": "hot_realtime_financialservicelocator_api",
     "version": "1.0.0",
     "description": "The central engine that servers both the Mobile and the Web app",
-    "main": "app.js",
+    "main": "server.js",
     "scripts": {
         "test": "mocha"
     },
