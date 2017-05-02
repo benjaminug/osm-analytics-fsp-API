@@ -3,6 +3,8 @@
  */
 
 module.exports = {
-    max_request_count: 5
+    max_request_count: 5,
+    http_status: 429, //This means to many requests have been sent to the server
+    retry_time: 3000 //Try again after 3 seconds
 };
 

@@ -18,7 +18,7 @@ var saveExpo = module.exports = {
         var radius = saveObject.radius;
         var searchterm = util.format('~"%s"', saveObject.search);
 
-        var query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|credit_institution|microfinance_bank|microfinance|sacco"]["name"%s](area););out;';
+        var query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|microfinance_bank|microfinance|sacco"]["name"%s](area););out;';
 
         query = util.format(query, radius, latitude, longitude, searchterm);
 

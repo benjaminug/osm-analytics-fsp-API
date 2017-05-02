@@ -19,7 +19,7 @@ var sendExpo = module.exports = {
         var radius = sendObject.radius;
         var searchterm = util.format('~"%s"', sendObject.search);
 
-        var query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|credit_institution|microfinance_bank|microfinance|money_transfter|post_office"]["name"%s](area););out;';
+        var query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|microfinance_bank|microfinance|money_transfter"]["name"%s](area););out;';
 
         query = util.format(query, radius, latitude, longitude, searchterm);
 
