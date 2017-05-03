@@ -11,6 +11,6 @@ app.use(bodyParser.json());
 
 var cache = require('./apicache');
 
-//app.use(cache('5 minutes'));
+app.use(cache('5 minutes'));
 
 module.exports = app;

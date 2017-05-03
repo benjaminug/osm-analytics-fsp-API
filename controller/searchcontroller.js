@@ -21,7 +21,7 @@ module.exports = {
         }
 
         var client_radius = Number(searchObject.radius);
-        searchService.processRequest(searchObject, next, res, client_radius);
+        searchService.processGeneralSearchRequest(searchObject, next, res, client_radius);
     }
 };
 
