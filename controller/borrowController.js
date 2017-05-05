@@ -11,14 +11,10 @@ module.exports = {
         var borrowObject = JSON.parse(req.params.borrow);//parse data to Json
 
         //Validate the search data object
-        var ValidationErrors = _geoJsonHelperService.dataValidator(borrowObject);
-        if (ValidationErrors) {
-            return next(new Error(ValidationErrors));
-        }
+        _geoJsonHelperService.dataValidator(borrowObject).then(function () {
 
+            borrowService.processBorrowRequest(borrowObject, next, res);
 
-        var client_radius = Number(borrowObject.radius);
-        borrowService.processBorrowRequest(borrowObject, next, res, client_radius);
-
+        }).catch(next);
     }
 };

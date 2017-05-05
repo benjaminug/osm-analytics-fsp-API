@@ -14,14 +14,11 @@ module.exports = {
         var searchObject = JSON.parse(req.params.search);//parse data to Json
 
         //Validate the search data object
-        var ValidationErrors = _geoJsonHelperService.dataValidator(searchObject);
+        _geoJsonHelperService.dataValidator(searchObject).then(function () {
+            var client_radius = Number(searchObject.radius);
+            searchService.processGeneralSearchRequest(searchObject, next, res, client_radius);
 
-        if (ValidationErrors) {
-            return next(new Error(ValidationErrors));
-        }
-
-        var client_radius = Number(searchObject.radius);
-        searchService.processGeneralSearchRequest(searchObject, next, res, client_radius);
+        }).catch(next);
     }
 };
 

@@ -7,9 +7,10 @@ const settings = require('../../common/settings');
 
 module.exports = {
 
-    processBorrowRequest: function (searchObject, next, res, client_radius) {
+    processBorrowRequest: function (searchObject, next, res) {
 
         var queryType = settings.FspCategory.Borrow;
+        var client_radius = Number(searchObject.radius);
 
         _geoJsonHelperService.process_request(searchObject, queryType, next, res, client_radius);
 

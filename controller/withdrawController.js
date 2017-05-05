@@ -11,13 +11,11 @@ module.exports = {
         var withdrawObject = JSON.parse(req.params.withdraw);//parse data to Json
 
         //Validate the search data object
-        var ValidationErrors = _geoJsonHelperService.dataValidator(withdrawObject);
-        if (ValidationErrors) {
-            return next(new Error(ValidationErrors));
-        }
+        _geoJsonHelperService.dataValidator(withdrawObject).then(function () {
+            var client_radius = Number(withdrawObject.radius);
+            withdrawService.processWithdrawRequest(withdrawObject, next, res, client_radius);
 
-        var client_radius = Number(withdrawObject.radius);
-        withdrawService.processWithdrawRequest(withdrawObject, next, res, client_radius);
+        }).catch(next);
 
     }
 };
