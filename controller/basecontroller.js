@@ -73,12 +73,8 @@ router.route('/').get(function (req, res) {
  *         description: An array of financial service providers
  *         schema:
  *           $ref: '#/definitions/Search'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  *       429:
- *         description: Sending to many requests to overpass api from the same IP generates a 429 error
+ *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
 router.route('/overpass/finance/:search').get(searchController.getFinancial_Data);
 
@@ -104,12 +100,8 @@ router.route('/overpass/finance/:search').get(searchController.getFinancial_Data
  *         description: An array of financial service providers that provide borrowing services
  *         schema:
  *           $ref: '#/definitions/Search'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  *       429:
- *         description: Sending to many requests to overpass api from the same IP generates a 429 error
+ *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
 router.route('/overpass/borrow/:borrow').get(borrowController.getBorrow_Data);
 
@@ -135,12 +127,8 @@ router.route('/overpass/borrow/:borrow').get(borrowController.getBorrow_Data);
  *         description: An array of financial service providers that provide saving services
  *         schema:
  *           $ref: '#/definitions/Search'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  *       429:
- *         description: Sending to many requests to overpass api from the same IP generates a 429 error
+ *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
 router.route('/overpass/save/:save').get(saveController.getSave_Data);
 
@@ -166,12 +154,8 @@ router.route('/overpass/save/:save').get(saveController.getSave_Data);
  *         description: An array of financial service providers that provide money transfer services
  *         schema:
  *           $ref: '#/definitions/Search'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  *       429:
- *         description: Sending to many requests to overpass api from the same IP generates a 429 error
+ *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
 router.route('/overpass/send/:send').get(sendController.getSend_Data);
 
@@ -197,12 +181,8 @@ router.route('/overpass/send/:send').get(sendController.getSend_Data);
  *         description: An array of financial service providers that provide money withdraw services
  *         schema:
  *           $ref: '#/definitions/Search'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  *       429:
- *         description: Sending to many requests to overpass api from the same IP generates a 429 error
+ *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
 router.route('/overpass/withdraw/:withdraw').get(withdrawController.getWithdraw_Data);
 
@@ -229,10 +209,6 @@ router.route('/overpass/withdraw/:withdraw').get(withdrawController.getWithdraw_
  *         description: The new saved entity
  *         schema:
  *           $ref: '#/definitions/Rating'
- *         examples:
- *           application/json:{
- *             "name":"Bank"
- *           }
  */
 router.route('/rating').post(ratingController.postRating);
 

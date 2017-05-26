@@ -12,7 +12,7 @@ var swaggerDefinition = {
             email: 'group_lug_proj_commercialis@laboremus.no'
         }
     },
-    host: 'localhost:3000',
+    host: 'localhost:3000',//'hotapi.laboremus.biz'
     basePath: '/'
 };
 

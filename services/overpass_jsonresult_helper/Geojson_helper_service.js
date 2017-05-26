@@ -21,26 +21,29 @@ function generateQuery(searchObject, fspType) {
         var searchTerm = '';
         if (searchObject.search) {
             //searchTerm = util.format('~"%s"', searchObject.search);
-            searchTerm = util.format('~"%s", i', searchObject.search);
+            searchTerm = util.format('~"%s", i', searchObject.search); //i stands for case insensitive
         }
 
         var query = "";
 
+        //querying for Fenced data
+        //query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|atm|credit_institution|microfinance_bank|microfinance|sacco|bureau_de_change|money_transfter|post_office"]["name"%s](area););out 10;';
+
         switch (Number(fspType)) {
             case settings.FspCategory.Save:
-                query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|microfinance_bank|microfinance|sacco"]["name"%s](area););out 20;';
+                query = '[out:json][timeout:25];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|microfinance_bank|microfinance|sacco"]["name"%s];);out 20;';
                 break;
             case settings.FspCategory.Borrow:
-                query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|credit_institution|microfinance_bank|microfinance|sacco"]["name"%s](area););out 20;';
+                query = '[out:json][timeout:25];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|credit_institution|microfinance_bank|microfinance|sacco"]["name"%s];);out 20;';
                 break;
             case settings.FspCategory.Withdraw:
-                query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|atm|microfinance_bank|microfinance|sacco|money_transfter"]["name"%s](area););out 20;';
+                query = '[out:json][timeout:25];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|atm|microfinance_bank|microfinance|sacco|money_transfter"]["name"%s];);out 20;';
                 break;
             case settings.FspCategory.Send:
-                query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|microfinance_bank|microfinance|money_transfter"]["name"%s](area););out 20;';
+                query = '[out:json][timeout:25];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|microfinance_bank|microfinance|money_transfter"]["name"%s];);out 20;';
                 break;
             case settings.FspCategory.Search:
-                query = '[out:json][timeout:25];area[name="Uganda"];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|atm|credit_institution|microfinance_bank|microfinance|sacco|bureau_de_change|money_transfter|post_office"]["name"%s](area););out 10;';
+                query = '[out:json][timeout:25];(node(around:%s,%s,%s)["amenity"~"bank|banking_agent|mobile_money_agent|atm|credit_institution|microfinance_bank|microfinance|sacco|bureau_de_change|money_transfter|post_office"]["name"%s];);out 10;';
                 break;
             case NaN: //if string value is passed, Number("someString") will return NaN
             default:

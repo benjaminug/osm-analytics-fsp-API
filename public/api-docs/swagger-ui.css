@@ -1316,11 +1316,11 @@
     margin: 50px 0
 }
 
-.swagger-ui .info hgroup.main {
+.swagger-ui .info .hgroup.main {
     margin: 0 0 20px
 }
 
-.swagger-ui .info hgroup.main a {
+.swagger-ui .info .hgroup.main a {
     font-size: 12px
 }
 
