@@ -14,6 +14,7 @@ function generateQuery(searchObject, fspType) {
 
     return new Promise(function (fulfill, reject) {
 
+        //[out:json];node[place="city"];out;
         var latitude = searchObject.lat;
         var longitude = searchObject.long;
         var radius = searchObject.radius;

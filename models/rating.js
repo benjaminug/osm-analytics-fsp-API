@@ -4,6 +4,10 @@
 
 var mongoose = require('mongoose');
 var RatingSchema = new mongoose.Schema({
+    fspId: {
+        type: Number,
+        required: [true, 'fspId is required']
+    },
     description: {
         type: String
     },
@@ -12,7 +16,6 @@ var RatingSchema = new mongoose.Schema({
         min: [0, 'Minimum rating is zero'],
         max: [5, 'Maximum rating is five'],
         required: [true, 'Rating is required']
-
     },
     created_date: {
         type: Date,

@@ -45,6 +45,8 @@ router.route('/').get(function (req, res) {
  *         type: number
  *       description:
  *         type: string
+ *       fspId:
+ *         type: number
  */
 
 
