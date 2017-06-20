@@ -22,8 +22,8 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-var cache = require('./apicache');
-
-app.use(cache('5 minutes'));
+// var cache = require('./apicache');
+//
+// app.use(cache('5 minutes'));
 
 module.exports = app;

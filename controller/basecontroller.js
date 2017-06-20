@@ -1,10 +1,8 @@
-/**
- * Created by Morgan on 4/12/2017.
- */
+
 const express = require('express');
 const router = express.Router();
-var searchController = require('../controller/searchcontroller');
-var userController = require('../controller/userController');
+const searchController = require('../controller/searchcontroller');
+const userController = require('../controller/userController');
 const borrowController = require('../controller/borrowController');
 const saveController = require('../controller/saveController');
 const sendController = require('../controller/sendController');
@@ -14,7 +12,7 @@ const ratingController = require('../controller/ratingController');
 
 //Home route
 router.route('/').get(function (req, res) {
-    res.send('<b>Hot Realtime Financial Service location</b>');
+    res.send('<b>Hot Real time Financial Service location</b>');
 });
 
 

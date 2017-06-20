@@ -1,12 +1,9 @@
-/**
- * Created by Morgan on 5/29/2017.
- */
 
 const should = require('should');
 const reqeust = require('request');
 const expect = require('chai').expect;
 const util = require('util');
-var GeoJson_helper = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
+const GeoJson_helper = require('../services/coreProcessor/GeojsonHelperService');
 const baseUrl = "http://localhost:3000/";
 
 

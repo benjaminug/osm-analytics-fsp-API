@@ -5,6 +5,7 @@
 var Rating = require('../models/rating');
 var validation = require('../validator/rating_data_validator');
 
+
 module.exports = {
     postRating: function (req, res, next) {
 

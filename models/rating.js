@@ -1,9 +1,6 @@
-/**
- * Created by Morgan on 5/4/2017.
- */
 
-var mongoose = require('mongoose');
-var RatingSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+const RatingSchema = new mongoose.Schema({
     fspId: {
         type: Number,
         required: [true, 'fspId is required']

@@ -16,6 +16,7 @@ app.use(function (err, req, res, next) {
     //https://webapplog.com/error-handling-and-running-an-express-js-app/
 });
 
+console.log(Number((6.688689).toFixed(3)))
 
 var port = process.env.PORT || 3000;
 

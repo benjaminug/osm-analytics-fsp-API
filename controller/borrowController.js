@@ -1,17 +1,15 @@
-/**
- * Created by Morgan on 4/28/2017.
- */
 
-const borrowService = require('../services/borrowFSPs/borrow_service');
-const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
+const borrowService = require('../services/borrowFSPs/borrowService');
+const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
+let processor = geoJsonHelperService.coreProcessor();
 
 module.exports = {
 
     getBorrow_Data: function (req, res, next) {
-        var borrowObject = JSON.parse(req.params.borrow);//parse data to Json
+        const borrowObject = JSON.parse(req.params.borrow);//parse data to Json
 
         //Validate the search data object
-        _geoJsonHelperService.dataValidator(borrowObject).then(function () {
+        processor.dataValidator(borrowObject).then(function () {
 
             borrowService.processBorrowRequest(borrowObject, next, res);
 
