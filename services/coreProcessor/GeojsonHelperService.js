@@ -2,7 +2,7 @@ const queryOverpass = require("query-overpass");
 const settings = require('../../common/settings');
 const validator = require('fluent-validator');
 const util = require('util');
-const setup = settings();
+let setup = settings();
 
 let maxQueryCount = 0;
 
@@ -83,7 +83,7 @@ function processOverpassResult(geoJsonData, search_radius) {
     return data;
 }
 
-module.exports.coreProcessor = function () {
+let coreProcessor = function () {
 
     return {
 
@@ -119,7 +119,7 @@ module.exports.coreProcessor = function () {
                         if (err.statusCode === setup.http_status && maxQueryCount < setup.max_request_count) {
                             console.log('error and retry: ' + err.statusCode);
                             setTimeout(function () {
-                                return new coreProcessor().process_request(searchObject, fspType, next, res, client_radius);
+                                return coreProcessor().process_request(searchObject, fspType, next, res, client_radius);
                             }, setup.retry_time);
                             return;
                         } else {
@@ -139,7 +139,7 @@ module.exports.coreProcessor = function () {
 
                         console.log('Recursion: ' + maxQueryCount);
 
-                        new coreProcessor().process_request(searchObject, fspType, next, res, client_radius);
+                        coreProcessor().process_request(searchObject, fspType, next, res, client_radius);
                     } else {
                         maxQueryCount = 0;
                         res.send(processedGeoJson);
@@ -152,5 +152,7 @@ module.exports.coreProcessor = function () {
     }
 
 };
+
+module.exports = coreProcessor;
 
 

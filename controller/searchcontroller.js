@@ -1,7 +1,8 @@
 
 const searchService = require('../services/generalSearch/searchservice');
 const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
-const processor = geoJsonHelperService.coreProcessor();
+const processor = geoJsonHelperService();
+let searchClass = searchService();
 
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
         //Validate the search data object
         processor.dataValidator(searchObject).then(function () {
             const client_radius = Number(searchObject.radius);
-            searchService.processGeneralSearchRequest(searchObject, next, res, client_radius);
+            searchClass.processGeneralSearchRequest(searchObject, next, res, client_radius);
 
         }).catch(next);
     }

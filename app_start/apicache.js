@@ -1,6 +1,4 @@
-/**
- * Created by Morgan on 4/26/2017.
- */
+//
 //
 // const _apicache = require('apicache');
 //

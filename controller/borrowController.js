@@ -1,7 +1,8 @@
 
 const borrowService = require('../services/borrowFSPs/borrowService');
 const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
-let processor = geoJsonHelperService.coreProcessor();
+let processor = geoJsonHelperService();
+let borrow = borrowService();
 
 module.exports = {
 
@@ -11,7 +12,7 @@ module.exports = {
         //Validate the search data object
         processor.dataValidator(borrowObject).then(function () {
 
-            borrowService.processBorrowRequest(borrowObject, next, res);
+            borrow.processBorrowRequest(borrowObject, next, res);
 
         }).catch(next);
     }

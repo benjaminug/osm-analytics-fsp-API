@@ -1,16 +1,20 @@
 
 const geoJsonHelperService = require('../coreProcessor/GeojsonHelperService');
 const settings = require('../../common/settings');
-const processor = geoJsonHelperService.coreProcessor();
+const processor = geoJsonHelperService();
 const setup = settings();
 
-module.exports = {
+module.exports = function (){
 
-    processSaveRequest: function (searchObject, next, res, client_radius) {
+    return{
+        processSaveRequest: function (searchObject, next, res, client_radius) {
 
-        let queryType = setup.FspCategory.Save;
+            let queryType = setup.FspCategory.Save;
 
-        processor.process_request(searchObject, queryType, next, res, client_radius);
+            processor.process_request(searchObject, queryType, next, res, client_radius);
 
+        }
     }
+
+
 };

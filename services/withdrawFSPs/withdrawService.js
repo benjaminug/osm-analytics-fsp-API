@@ -1,7 +1,7 @@
 
 const geoJsonHelperService = require('../coreProcessor/GeojsonHelperService');
 const settings = require('../../common/settings');
-const processor = geoJsonHelperService.coreProcessor();
+const processor = geoJsonHelperService();
 const setup = settings();
 
 module.exports = function (){

@@ -1,9 +1,9 @@
 
 const withdrawService = require('../services/withdrawFSPs/withdrawService');
 const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
-const processor = geoJsonHelperService.coreProcessor();
+const processor = geoJsonHelperService();
 
-let withdrawServiceClass = withdrawService()
+let withdrawServiceClass = withdrawService();
 
 module.exports = {
 

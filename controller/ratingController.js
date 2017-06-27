@@ -2,8 +2,9 @@
  * Created by Morgan on 5/4/2017.
  */
 
-var Rating = require('../models/rating');
-var validation = require('../validator/rating_data_validator');
+const Rating = require('../models/rating');
+const validationService = require('../validator/ratingDataValidator');
+let validation = validationService();
 
 
 module.exports = {

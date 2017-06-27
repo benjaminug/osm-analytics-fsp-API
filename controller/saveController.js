@@ -1,7 +1,8 @@
 
 const saveService = require('../services/saveFSPs/saveService');
 const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
-let processor = geoJsonHelperService.coreProcessor();
+let processor = geoJsonHelperService();
+let save = saveService();
 
 module.exports = {
 
@@ -11,7 +12,7 @@ module.exports = {
         //Validate the search data object
         processor.dataValidator(saveObject).then(function () {
             let client_radius = Number(saveObject.radius);
-            saveService.processSaveRequest(saveObject, next, res, client_radius);
+            save.processSaveRequest(saveObject, next, res, client_radius);
 
         }).catch(next);
 
