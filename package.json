@@ -13,7 +13,6 @@
   "author": "Morgan",
   "license": "ISC",
   "dependencies": {
-    "apicache": "^0.8.7",
     "body-parser": "^1.17.1",
     "chai": "^4.0.0",
     "express": "^4.15.2",
