@@ -1,13 +1,8 @@
-/**
- * Created by Morgan on 4/26/2017.
- */
-
-var app = require('./app_start/app');
-
+'use strict'
+let app = require('./app_start/app');
 
 //Initialise routes
 app.use('/api', require('./controller/basecontroller'));
-
 
 //Error handling middleware
 app.use(function (err, req, res, next) {
@@ -17,7 +12,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-var port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
 //Listen for request
 app.listen(port, function () {

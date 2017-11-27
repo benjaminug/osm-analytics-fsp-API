@@ -1,19 +1,18 @@
-/**
- * Created by Morgan on 4/28/2017.
- */
 
-const saveService = require('../services/saveFSPs/save_service');
-const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
+const saveService = require('../services/saveFSPs/saveService');
+const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
+let processor = geoJsonHelperService();
+let save = saveService();
 
 module.exports = {
 
     getSave_Data: function (req, res, next) {
-        var saveObject = JSON.parse(req.params.save);//parse data to Json
+        let saveObject = JSON.parse(req.params.save);//parse data to Json
 
         //Validate the search data object
-        _geoJsonHelperService.dataValidator(saveObject).then(function () {
-            var client_radius = Number(saveObject.radius);
-            saveService.processSaveRequest(saveObject, next, res, client_radius);
+        processor.dataValidator(saveObject).then(function () {
+            let client_radius = Number(saveObject.radius);
+            save.processSaveRequest(saveObject, next, res, client_radius);
 
         }).catch(next);
 

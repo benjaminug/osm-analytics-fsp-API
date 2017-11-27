@@ -12,8 +12,9 @@ var swaggerDefinition = {
             email: 'group_lug_proj_commercialis@laboremus.no'
         }
     },
-    host: 'localhost:3000',//'hotapi.laboremus.biz'
-    basePath: '/'
+    //host: 'localhost:3000',//'hotapi.laboremus.biz'
+    basePath: '/',
+    schemes: ["http","https"]
 };
 
 // options for the swagger docs

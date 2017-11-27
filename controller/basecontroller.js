@@ -1,22 +1,20 @@
-/**
- * Created by Morgan on 4/12/2017.
- */
 const express = require('express');
 const router = express.Router();
-var searchController = require('../controller/searchcontroller');
-var userController = require('../controller/userController');
+const searchController = require('../controller/searchcontroller');
+const userController = require('../controller/userController');
 const borrowController = require('../controller/borrowController');
 const saveController = require('../controller/saveController');
 const sendController = require('../controller/sendController');
 const withdrawController = require('../controller/withdrawController');
 const ratingController = require('../controller/ratingController');
-
+const settings = require('../common/settings');
+const cache = require('../app_start/cacheData');
+let setup = settings();
 
 //Home route
 router.route('/').get(function (req, res) {
-    res.send('<b>Hot Realtime Financial Service location</b>');
+    res.redirect('/api-docs');
 });
-
 
 //----------------Models----------------
 
@@ -35,7 +33,6 @@ router.route('/').get(function (req, res) {
  *         type: number
  */
 
-
 /**
  * @swagger
  * definition:
@@ -45,11 +42,12 @@ router.route('/').get(function (req, res) {
  *         type: number
  *       description:
  *         type: string
+ *       fspId:
+ *         type: number
  */
 
 
 //-----------------End of Models----------------
-
 
 /**
  * @swagger
@@ -76,7 +74,7 @@ router.route('/').get(function (req, res) {
  *       429:
  *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
-router.route('/overpass/finance/:search').get(searchController.getFinancial_Data);
+router.route('/overpass/finance/:search').get(cache(setup.cacheDuration), searchController.getFinancial_Data);
 
 /**
  * @swagger
@@ -103,7 +101,7 @@ router.route('/overpass/finance/:search').get(searchController.getFinancial_Data
  *       429:
  *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
-router.route('/overpass/borrow/:borrow').get(borrowController.getBorrow_Data);
+router.route('/overpass/borrow/:borrow').get(cache(setup.cacheDuration), borrowController.getBorrow_Data);
 
 /**
  * @swagger
@@ -130,7 +128,7 @@ router.route('/overpass/borrow/:borrow').get(borrowController.getBorrow_Data);
  *       429:
  *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
-router.route('/overpass/save/:save').get(saveController.getSave_Data);
+router.route('/overpass/save/:save').get(cache(setup.cacheDuration), saveController.getSave_Data);
 
 /**
  * @swagger
@@ -157,7 +155,7 @@ router.route('/overpass/save/:save').get(saveController.getSave_Data);
  *       429:
  *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
-router.route('/overpass/send/:send').get(sendController.getSend_Data);
+router.route('/overpass/send/:send').get(cache(setup.cacheDuration), sendController.getSend_Data);
 
 /**
  * @swagger
@@ -184,7 +182,7 @@ router.route('/overpass/send/:send').get(sendController.getSend_Data);
  *       429:
  *         description: Sending too many requests to overpass api from the same IP generates a 429 error
  */
-router.route('/overpass/withdraw/:withdraw').get(withdrawController.getWithdraw_Data);
+router.route('/overpass/withdraw/:withdraw').get(cache(setup.cacheDuration), withdrawController.getWithdraw_Data);
 
 /**
  * @swagger

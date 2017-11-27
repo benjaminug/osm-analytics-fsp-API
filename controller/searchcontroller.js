@@ -1,22 +1,19 @@
-/**
- * Created by Morgan on 4/21/2017.
- */
 
-
-
-const searchService = require('../services/mobile_search_service/searchservice');
-const _geoJsonHelperService = require('../services/overpass_jsonresult_helper/Geojson_helper_service');
+const searchService = require('../services/generalSearch/searchservice');
+const geoJsonHelperService = require('../services/coreProcessor/GeojsonHelperService');
+const processor = geoJsonHelperService();
+let searchClass = searchService();
 
 
 module.exports = {
 
     getFinancial_Data: function (req, res, next) {
-        var searchObject = JSON.parse(req.params.search);//parse data to Json
+        const searchObject = JSON.parse(req.params.search);//parse data to Json
 
         //Validate the search data object
-        _geoJsonHelperService.dataValidator(searchObject).then(function () {
-            var client_radius = Number(searchObject.radius);
-            searchService.processGeneralSearchRequest(searchObject, next, res, client_radius);
+        processor.dataValidator(searchObject).then(function () {
+            const client_radius = Number(searchObject.radius);
+            searchClass.processGeneralSearchRequest(searchObject, next, res, client_radius);
 
         }).catch(next);
     }

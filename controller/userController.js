@@ -1,8 +1,5 @@
-/**
- * Created by Morgan on 4/26/2017.
- */
 
-var User = require('../models/user');
+const User = require('../models/user');
 
 module.exports = {
 
@@ -32,9 +29,9 @@ module.exports = {
     updateUser: function (req, res, next) {
         //do something
 
-        var data = req.body;
+        let data = req.body;
 
-        var update = {
+        let update = {
             name: data.name,
             email: data.email,
             password: data.password
